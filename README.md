@@ -15,17 +15,31 @@ LinkedIn / note 投稿ネタを自動収集するための GitHub Actions 版 He
 
 GitHub Actions の `schedule` はUTC指定なので、ワークフロー内ではJSTに換算したcronを使っています。
 
+## モデルプロバイダ
+
+Hermesは以下の順でモデルを使います。
+
+1. `OPENAI_API_KEY` がある場合はOpenAIを優先
+2. OpenAIがquota不足・課金エラー・一時エラーで失敗した場合はGeminiへfallback
+3. `OPENAI_API_KEY` がなく、`GEMINI_API_KEY` がある場合はGeminiで実行
+
+GeminiではまずGoogle Search groundingを試し、利用できない場合は検索なしで再試行します。その場合、URL不明の情報は「保留・要確認」に回すようプロンプトで制御しています。
+
 ## 必要な設定
 
 Repository Settings → Secrets and variables → Actions で以下を設定してください。
 
 ### Secrets
 
+少なくともどちらか一方を設定してください。
+
 - `OPENAI_API_KEY`: OpenAI APIキー
+- `GEMINI_API_KEY`: Gemini APIキー
 
 ### Variables 任意
 
-- `OPENAI_MODEL`: 使用モデル。未設定時は `gpt-4.1-mini`。
+- `OPENAI_MODEL`: OpenAI使用モデル。未設定時は `gpt-4.1-mini`。
+- `GEMINI_MODEL`: Gemini使用モデル。未設定時は `gemini-2.5-flash-lite`。
 
 ## 出力先
 
@@ -77,6 +91,7 @@ GitHub Actions画面から各workflowを選び、`Run workflow` を押すと即�
 - 投稿前に必ず人間が確認する
 - クライアント情報や個人情報は入れない
 - 誇大表現、鑑定評価・投資助言に見える表現は `memory/banned_phrases.md` で抑制する
+- 無料枠・外部API利用時は、非公開の顧客情報や機密データを入力しない
 
 ## 将来拡張
 
