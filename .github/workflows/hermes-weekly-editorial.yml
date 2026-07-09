@@ -1,0 +1,43 @@
+name: Hermes Weekly Editorial Review
+
+on:
+  schedule:
+    # GitHub Actions cron is UTC. 01:17 UTC Sat = 10:17 JST Sat.
+    - cron: "17 1 * * 6"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  run-hermes-weekly:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Hermes weekly editorial review
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-4.1-mini' }}
+          CREATE_GITHUB_ISSUE: "true"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/hermes_run.py --mode weekly
+
+      - name: Commit Hermes output
+        run: |
+          git config user.name "hermes-bot"
+          git config user.email "hermes-bot@users.noreply.github.com"
+          git add outputs memory
+          git commit -m "Hermes weekly editorial review" || echo "No changes to commit"
+          git push

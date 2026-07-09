@@ -1,0 +1,24 @@
+{
+  "version": 1,
+  "source_preferences": {
+    "official_docs": 5,
+    "academic_papers": 5,
+    "jsai": 5,
+    "jstage": 5,
+    "government_open_data": 5,
+    "github_repositories": 4,
+    "vendor_blogs": 3,
+    "general_news": 2,
+    "social_posts": 1
+  },
+  "topic_bias": {
+    "pdf_ocr": 5,
+    "public_data": 5,
+    "white_box_avm": 5,
+    "real_estate_ai": 5,
+    "ai_security": 4,
+    "ai_agents": 4,
+    "jsai_research": 4,
+    "generic_ai_news": 1
+  }
+}

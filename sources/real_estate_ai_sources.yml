@@ -1,0 +1,23 @@
+queries:
+  - 不動産 AI 査定 AVM 公的データ PDF
+  - 不動産価格推定 オープンデータ AI
+  - 地価 公示地価 路線価 AI 活用
+  - 都市計画 ハザードマップ PDF AI 構造化
+  - real estate AI AVM transparency public data
+focus:
+  - 不動産AI
+  - AVM
+  - 公的データ
+  - 地価
+  - 路線価
+  - 都市計画
+  - ハザード
+  - レントロール
+  - PDF行政資料
+preferred_domains:
+  - mlit.go.jp
+  - nta.go.jp
+  - land.mlit.go.jp
+  - reinet.or.jp
+  - github.com
+  - arxiv.org

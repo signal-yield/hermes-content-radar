@@ -1,0 +1,43 @@
+name: Hermes Daily Tech Radar
+
+on:
+  schedule:
+    # GitHub Actions cron is UTC. 23:17 UTC = 08:17 JST.
+    - cron: "17 23 * * *"
+  workflow_dispatch:
+
+permissions:
+  contents: write
+  issues: write
+
+jobs:
+  run-hermes-daily:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install dependencies
+        run: pip install -r requirements.txt
+
+      - name: Run Hermes daily radar
+        env:
+          OPENAI_API_KEY: ${{ secrets.OPENAI_API_KEY }}
+          OPENAI_MODEL: ${{ vars.OPENAI_MODEL || 'gpt-4.1-mini' }}
+          CREATE_GITHUB_ISSUE: "true"
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: python scripts/hermes_run.py --mode daily
+
+      - name: Commit Hermes output
+        run: |
+          git config user.name "hermes-bot"
+          git config user.email "hermes-bot@users.noreply.github.com"
+          git add outputs memory
+          git commit -m "Hermes daily tech radar" || echo "No changes to commit"
+          git push
