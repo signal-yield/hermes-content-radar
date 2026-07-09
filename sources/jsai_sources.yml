@@ -1,0 +1,17 @@
+queries:
+  - 人工知能学会 JSAI 最新 論文 実務応用
+  - site:ai-gakkai.or.jp 人工知能学会 全国大会 JSAI
+  - site:jstage.jst.go.jp 人工知能学会 論文誌 AI 実務
+  - JSAI 不動産 AI エージェント オープンデータ
+focus:
+  - 人工知能学会
+  - JSAI全国大会
+  - J-STAGE
+  - 論文誌
+  - 学会誌 人工知能
+  - 研究会
+preferred_domains:
+  - ai-gakkai.or.jp
+  - jstage.jst.go.jp
+  - jsaiconf.jp
+  - arxiv.org
