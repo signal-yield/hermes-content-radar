@@ -1,0 +1,24 @@
+queries:
+  - 生成AI エージェント 最新 実務活用
+  - AI agent workflow GitHub Actions OpenAI
+  - RAG PDF OCR structured data business automation
+  - Claude Codex Cursor GitHub Copilot agent updates
+  - open source AI agent framework enterprise security
+focus:
+  - AIエージェント
+  - RAG
+  - PDF/OCR
+  - 構造化データ
+  - OSS
+  - セキュリティ
+  - 業務自動化
+preferred_domains:
+  - openai.com
+  - anthropic.com
+  - github.blog
+  - github.com
+  - arxiv.org
+  - huggingface.co
+  - cloud.google.com
+  - aws.amazon.com
+  - microsoft.com
